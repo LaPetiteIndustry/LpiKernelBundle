@@ -6,7 +6,6 @@ use Sonata\IntlBundle\Twig\Extension\DateTimeExtension;
 
 class DateExtension extends DateTimeExtension
 {
-
     public function getFunctions()
     {
         return array(
@@ -20,7 +19,6 @@ class DateExtension extends DateTimeExtension
     public function eventDate($date)
     {
         return $this->formatDate($date, 'dd/MM/YY', 'fr');
-
     }
 
     public function eventTime($date)
