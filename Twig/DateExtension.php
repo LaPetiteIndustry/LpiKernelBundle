@@ -1,7 +1,7 @@
 <?php
 namespace Lpi\KernelBundle\Twig;
 
-use Lpi\KernelBundle\Utils\Utils;
+use Lpi\Kernel\Utils\Text;
 use Sonata\IntlBundle\Twig\Extension\DateTimeExtension;
 
 class DateExtension extends DateTimeExtension
@@ -49,7 +49,7 @@ class DateExtension extends DateTimeExtension
 
     public function slugify($string)
     {
-        return Utils::slugify($string);
+        return Text::slugify($string);
     }
 
     public function getName()
