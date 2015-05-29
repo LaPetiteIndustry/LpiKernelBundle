@@ -3,9 +3,7 @@
 // if the bundle is within a symfony project, try to reuse the project's autoload
 
 $files = array(
-    __DIR__.'/../vendor/autoload.php',
-    __DIR__.'/../../../../app/autoload.php',
-    __DIR__.'/../../../../apps/autoload.php',
+    __DIR__.'/../vendor/autoload.php'
 );
 
 $autoload = false;
@@ -16,6 +14,8 @@ foreach ($files as $file) {
         break;
     }
 }
+
+$autoload->addPsr4('Lpi\\KernelBundle\\', __DIR__.'/../src/');
 
 if (!$autoload) {
     die('Unable to find autoload.php file, please use composer to load dependencies:

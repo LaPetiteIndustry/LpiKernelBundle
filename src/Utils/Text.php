@@ -2,7 +2,7 @@
 
 namespace Lpi\KernelBundle\Utils;
 
-class Utils
+class Text
 {
 
     public static function slugify($text)
