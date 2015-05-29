@@ -35,3 +35,6 @@
 
 # Composer PHAR
 /composer.phar
+.DS_Store
+.idea
+*.lock
