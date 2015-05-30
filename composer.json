@@ -1,5 +1,5 @@
 {
-  "name": "lpi_lab/kernel-bundle",
+  "name": "lpi-lab/kernel-bundle",
   "type": "symfony-bundle",
   "description": "Symfony LpiKernelBundle",
   "keywords": [],
@@ -20,7 +20,7 @@
     "php": ">=5.3.3",
     "symfony/symfony": "2.6.*",
     "sonata-project/intl-bundle": "2.2.*",
-    "lpi_lab/kernel": "1.0.*@dev"
+    "lpi-lab/kernel": "1.0.*@dev"
   },
   "require-dev": {
     "symfony/phpunit-bridge": "3.0.*@dev"
