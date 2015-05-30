@@ -41,7 +41,7 @@ class DateExtension extends DateTimeExtension
                     '09'=>'Septembre',
                     '10'=>'Octobre',
                     '11'=>'Novembre',
-                    '12'=>'Décembre',
+                    '12'=>'Décembre'
                 ];
 
         return $months[$monthNumber];
