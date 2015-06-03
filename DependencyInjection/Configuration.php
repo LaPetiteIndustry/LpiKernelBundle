@@ -2,6 +2,7 @@
 
 namespace Lpi\KernelBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -23,7 +24,24 @@ class Configuration implements ConfigurationInterface
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
-
+        $this->addModelSection($rootNode);
         return $treeBuilder;
     }
+
+    /**
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    private function addModelSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+            ->arrayNode('class')
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('zone')->defaultValue('Application\\Lpi\\KernelBundle\\Entity\\Zone')->end()
+
+
+            ;
+    }
+
 }

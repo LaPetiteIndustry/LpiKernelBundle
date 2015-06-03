@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="lpi.kernel.admin.translation_domain">LpiKernelBundle</parameter>
+        <parameter key="lpi.kernel.admin.zone.class">Lpi\KernelBundle\Admin\ZoneAdmin</parameter>
+        <parameter key="lpi.kernel.admin.zone.controller">LpiKernelBundle:ZoneAdmin</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="lpi.kernel.admin.group" class="%lpi.kernel.admin.zone.class%">
+            <tag name="sonata.admin" manager_type="orm" group="Structure" label="Zone"
+                 label_catalogue="%lpi.kernel.admin.translation_domain%"
+                 label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument/>
+            <argument>%lpi.kernel.admin.zone.entity%</argument>
+            <argument>%lpi.kernel.admin.zone.controller%</argument>
+        </service>
+
+    </services>
+</container>
