@@ -19,7 +19,8 @@ class ZoneAdmin extends Admin
     {
         // define group zoning
         $formMapper
-            ->with($this->trans('Informations'), array('class' => 'col-md-2'))->end()
+            ->with($this->trans('Informations'), array('class' => 'col-md-3'))->end()
+            ->with($this->trans('News'), array('class' => 'col-md-9'))->end()
         ;
 
         $formMapper
@@ -27,6 +28,17 @@ class ZoneAdmin extends Admin
                 ->add('name')
                 ->add('slug')
             ->add('enabled', null, array('data' => true))
+            ->end()
+            ->with('News')
+            ->add('zoneHasNews', 'sonata_type_collection', array(
+                'cascade_validation' => true,
+            ), array(
+                    'edit'              => 'inline',
+                    'inline'            => 'table',
+                    'sortable'          => 'position',
+                    'admin_code'        => 'lpi.news.admin.zone_has_news'
+                )
+            )
             ->end()
         ;
     }
@@ -48,6 +60,24 @@ class ZoneAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('name');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prePersist($group)
+    {
+        // fix weird bug with setter object not being call
+        $group->setZoneHasNews($group->getZoneHasNews());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preUpdate($group)
+    {
+        // fix weird bug with setter object not being call
+        $group->setZoneHasNews($group->getZoneHasNews());
     }
 
 }

@@ -1,7 +1,9 @@
 <?php
 namespace Lpi\KernelBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Lpi\Kernel\Utils\Text;
+use Lpi\NewsBundle\Model\ZoneHasNewsInterface;
 
 abstract class BaseZone
 {
@@ -10,7 +12,12 @@ abstract class BaseZone
     protected $enabled = true;
     protected $createdAt;
     protected $updatedAt;
+    protected $zoneHasNews;
 
+    public function __construct()
+    {
+        $this->zoneHasNews = new ArrayCollection;
+    }
     /**
      * @return mixed
      */
@@ -59,6 +66,32 @@ abstract class BaseZone
         $this->enabled = $enabled;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getZoneHasNews()
+    {
+        return $this->zoneHasNews;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setZoneHasNews($zoneHasNews)
+    {
+        $this->zoneHasNews = new ArrayCollection();
+
+        foreach ($zoneHasNews as $zah) {
+            $this->addZoneHasNews($zah);
+        }
+    }
+
+    public function addZoneHasNews(ZoneHasNewsInterface $zoneHasNews)
+    {
+        $zoneHasNews->setZone($this);
+        $this->zoneHasNews[] = $zoneHasNews;
+    }
 
     public function prePersist()
     {
