@@ -9,6 +9,19 @@
             <tag name="twig.extension"/>
             <argument type="service" id="sonata.intl.templating.helper.datetime"/>
         </service>
+
+        <service id="lpi.kernel.contact.block" class="Lpi\KernelBundle\Block\ContactBlockService">
+            <tag name="sonata.block"/>
+            <argument>lpi.contact.block</argument>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="lpi.kernel.contact.service"/>
+        </service>
+
+        <service id="lpi.kernel.contact.service" class="Lpi\KernelBundle\Controller\ContactServiceController">
+            <argument type="service" id="templating"/>
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="router"/>
+        </service>
     </services>
 
 </container>
