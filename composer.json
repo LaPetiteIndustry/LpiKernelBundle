@@ -21,7 +21,7 @@
     "symfony/symfony": "2.6.*",
     "sonata-project/intl-bundle": "2.2.*",
     "lpi-lab/kernel": "1.0.*@dev",
-    "sonata-project/block-bundle": "^2.3"
+    "sonata-project/block-bundle": "2.2.*"
   },
   "require-dev": {
     "symfony/phpunit-bridge": "3.0.*@dev",
