@@ -40,6 +40,16 @@
                 <target>Actif</target>
             </trans-unit>
 
+               <trans-unit id="kernel.form.label_zone">
+                <source>form.label_zone</source>
+                <target>Zone</target>
+            </trans-unit>
+
+            <trans-unit id="kernel.filter.label_content">
+                <source>filter.label_content</source>
+                <target>Contenu</target>
+            </trans-unit>
+
 
         </body>
     </file>

@@ -3,21 +3,23 @@ namespace Lpi\KernelBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Lpi\Kernel\Utils\Text;
+use Lpi\KernelBundle\Entity\Behaviour\Timestampable;
 use Lpi\NewsBundle\Model\ZoneHasNewsInterface;
 
 abstract class BaseZone
 {
+    use Timestampable;
+
     protected $name;
     protected $slug;
     protected $enabled = true;
-    protected $createdAt;
-    protected $updatedAt;
     protected $zoneHasNews;
 
     public function __construct()
     {
         $this->zoneHasNews = new ArrayCollection;
     }
+
     /**
      * @return mixed
      */
@@ -93,14 +95,8 @@ abstract class BaseZone
         $this->zoneHasNews[] = $zoneHasNews;
     }
 
-    public function prePersist()
+    public function __toString()
     {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-    }
-
-    public function preUpdate()
-    {
-        $this->updatedAt = new \DateTime();
+        return $this->getName() . ' (' . $this->getSlug() . ')';
     }
 }

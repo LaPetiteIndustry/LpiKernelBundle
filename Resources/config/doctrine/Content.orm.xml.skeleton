@@ -9,8 +9,9 @@
             association mapping  : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/association-mapping/en
     -->
     <entity
-        name="Application\Lpi\KernelBundle\Entity\Zone"
-        table="lpi__zone"
+        name="Application\Lpi\KernelBundle\Entity\Content"
+        table="lpi__content"
+        repository-class="Lpi\KernelBundle\Repository\ContentRepository"
         >
 
         <id name="id" type="integer" column="id">

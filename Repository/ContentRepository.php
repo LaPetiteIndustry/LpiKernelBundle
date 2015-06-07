@@ -1,11 +1,21 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: david
- * Date: 07/06/2015
- * Time: 13:53
- */
+namespace Lpi\KernelBundle\Repository;
 
-class ContentRepository {
+use Doctrine\ORM\EntityRepository;
 
+class ContentRepository extends EntityRepository implements ContentRepositoryInterface {
+
+    public function findContentInZone($zoneSlug)
+    {
+        $response = $this->createQueryBuilder('content')
+            ->join('content.zone','zone')
+            ->where('zone.slug = :zoneSlug')
+            ->setParameter('zoneSlug',$zoneSlug)->getQuery()->getOneOrNullResult();
+
+        if(null !== $response){
+            return $response->getContent();
+        }
+
+        return null;
+    }
 }

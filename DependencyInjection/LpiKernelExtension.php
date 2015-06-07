@@ -28,6 +28,7 @@ class LpiKernelExtension extends Extension
         $loader->load('doctrine_orm_admin.xml');
 
         $container->setParameter('lpi.kernel.admin.zone.entity', $config['class']['zone']);
+        $container->setParameter('lpi.kernel.admin.content.entity', $config['class']['content']);
 
 
     }

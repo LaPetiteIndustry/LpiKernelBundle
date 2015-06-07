@@ -1,15 +1,11 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: david
- * Date: 07/06/2015
- * Time: 13:23
- */
 
-namespace Lpi\KernelBundle\Entity\Trait;
+namespace Lpi\KernelBundle\Entity\Behaviour;
 
-
-trait Timestampable {
+trait Timestampable
+{
+    private $createdAt;
+    private $updatedAt;
 
     public function prePersist()
     {

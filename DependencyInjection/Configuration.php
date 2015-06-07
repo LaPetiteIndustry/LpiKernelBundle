@@ -39,6 +39,7 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('zone')->defaultValue('Application\\Lpi\\KernelBundle\\Entity\\Zone')->end()
+                ->scalarNode('content')->defaultValue('Application\\Lpi\\KernelBundle\\Entity\\Content')->end()
 
 
             ;

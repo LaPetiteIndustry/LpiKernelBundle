@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Admin;
+namespace Lpi\KernelBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -9,7 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 
 class ContentAdmin extends Admin
 {
-    protected $translationDomain = 'AppBundle';
+    protected $translationDomain = 'LpiKernelBundle';
 
     /**
      * {@inheritdoc}
@@ -17,7 +17,7 @@ class ContentAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('content', 'textarea', ['attr' => ['rows' => 30]])
+            ->add('content', 'textarea', ['attr' => ['rows' => 30], 'label' => 'Contenu'])
             ->add('zone');
     }
 
@@ -27,8 +27,8 @@ class ContentAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('extrait',null,['label'=>'Extrait'])
-            ->add('zone',null,['label'=>'Zone']);
+            ->addIdentifier('extrait', null, ['label' => 'Extrait'])
+            ->add('zone', null, ['label' => 'Zone']);
     }
 
     /**

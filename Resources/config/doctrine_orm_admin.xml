@@ -7,17 +7,29 @@
         <parameter key="lpi.kernel.admin.translation_domain">LpiKernelBundle</parameter>
         <parameter key="lpi.kernel.admin.zone.class">Lpi\KernelBundle\Admin\ZoneAdmin</parameter>
         <parameter key="lpi.kernel.admin.zone.controller">LpiKernelBundle:ZoneAdmin</parameter>
+
+        <parameter key="lpi.kernel.admin.content.class">Lpi\KernelBundle\Admin\ContentAdmin</parameter>
+        <parameter key="lpi.kernel.admin.content.controller">LpiKernelBundle:ContentAdmin</parameter>
     </parameters>
 
     <services>
 
-        <service id="lpi.kernel.admin.group" class="%lpi.kernel.admin.zone.class%">
+        <service id="lpi.kernel.admin.zone" class="%lpi.kernel.admin.zone.class%">
             <tag name="sonata.admin" manager_type="orm" group="Structure" label="Zone"
                  label_catalogue="%lpi.kernel.admin.translation_domain%"
                  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument/>
             <argument>%lpi.kernel.admin.zone.entity%</argument>
             <argument>%lpi.kernel.admin.zone.controller%</argument>
+        </service>
+
+        <service id="lpi.kernel.admin.content" class="%lpi.kernel.admin.content.class%">
+            <tag name="sonata.admin" manager_type="orm" group="Structure" label="Blocs"
+                 label_catalogue="%lpi.kernel.admin.translation_domain%"
+                 label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument/>
+            <argument>%lpi.kernel.admin.content.entity%</argument>
+            <argument>%lpi.kernel.admin.content.controller%</argument>
         </service>
 
     </services>

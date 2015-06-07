@@ -17,6 +17,13 @@
             <argument type="service" id="lpi.kernel.contact.service"/>
         </service>
 
+        <service id="lpi.kernel.content.block" class="Lpi\KernelBundle\Block\ContentBlockService">
+            <tag name="sonata.block"/>
+            <argument/>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="lpi.kernel.repository.content"/>
+        </service>
+
         <service id="lpi.kernel.contact.service" class="Lpi\KernelBundle\Controller\ContactServiceController">
             <argument type="service" id="templating"/>
             <argument type="service" id="form.factory"/>
@@ -31,6 +38,14 @@
             <argument type="string">%sender_contact%</argument>
         </service>
 
-    </services>
 
+        <service id="lpi.kernel.repository.content"
+                 class="Lpi\KernelBundle\Repository\ContentRepository"
+                 factory-service="doctrine.orm.default_entity_manager"
+                 factory-method="getRepository">
+            <argument>Application\Lpi\KernelBundle\Entity\Content</argument>
+        </service>
+
+
+    </services>
 </container>
