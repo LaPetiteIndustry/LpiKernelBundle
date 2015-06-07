@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <mapped-superclass name="Lpi\KernelBundle\Entity\BaseContent" >
+    <mapped-superclass name="Lpi\KernelBundle\Entity\BaseContent" repository-class="Lpi\KernelBundle\Emtit" >
 
-        <field name="content"       type="string"   column="name"  length="50000"/>
+        <field name="content"       type="text"   column="name"  length="50000"/>
         <many-to-one field="zone" target-entity="Application\Lpi\KernelBundle\Entity\Zone"/>
 
         <field name="updatedAt"          column="updated_at"     type="datetime" />
