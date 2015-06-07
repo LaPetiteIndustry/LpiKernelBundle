@@ -8,10 +8,8 @@ use Symfony\Component\Validator\Constraints\Length;
 
 class ContactType extends AbstractType {
 
-    public static function createForm(FormFactory $formFactory, $action) {
-        $form = $formFactory->createBuilder(new ContactType());
-        $form->setAction($action);
-        return $form;
+    public static function createForm(FormFactory $formFactory, $entity, $route) {
+        return $formFactory->createBuilder(new ContactType(), $entity, ['action'=>$route]);
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

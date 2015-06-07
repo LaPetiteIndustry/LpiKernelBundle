@@ -1,7 +1,10 @@
 <?php
 namespace Lpi\KernelBundle\Controller;
 
+use Lpi\KernelBundle\Entity\Contact;
+use Lpi\KernelBundle\Exception\MailNotSendException;
 use Lpi\KernelBundle\Form\ContactType;
+use Lpi\KernelBundle\Service\ContactMailer;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -22,19 +25,19 @@ class ContactServiceController
      */
     private $formFactory;
 
-    /**
-     * @var Router
-     */
-    private $router;
-
     private $action;
+    /**
+     * @var ContactMailer
+     */
+    private $mailer;
 
-    public function __construct(EngineInterface $templating, FormFactory $formFactory, Router $router)
+    public function __construct(EngineInterface $templating, FormFactory $formFactory, Router $router, ContactMailer $mailer)
     {
         $this->formFactory = $formFactory;
         $this->action = $router->generate('contact_type');
-        $this->form = ContactType::createForm($formFactory, $this->action);
-        $this->router = $router;
+        $this->form = ContactType::createForm($formFactory, new Contact(), $this->action);
+
+        $this->mailer = $mailer;
     }
 
     public function getFormView()
@@ -44,11 +47,17 @@ class ContactServiceController
 
     public function submitFormAction(Request $request)
     {
-        $form = ContactType::createForm($this->formFactory, $this->action)->getForm();
+        $contact = new Contact();
+        $form = ContactType::createForm($this->formFactory, $contact, $this->action)->getForm();
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            return new JsonResponse("ok", 200);
+            try {
+                $this->mailer->send($form->getData());
+            } catch(MailNotSendException $e) {
+                return new JsonResponse('Unable to send e-mail', 500);
+            }
+            return new JsonResponse('ok', 200);
         }
 
         foreach ($form as $e)

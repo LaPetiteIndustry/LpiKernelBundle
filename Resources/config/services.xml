@@ -21,7 +21,16 @@
             <argument type="service" id="templating"/>
             <argument type="service" id="form.factory"/>
             <argument type="service" id="router"/>
+            <argument type="service" id="lpi.kernel.contact.service.email"/>
         </service>
+
+        <service id="lpi.kernel.contact.service.email" class="Lpi\KernelBundle\Service\ContactMailer">
+            <argument type="service" id="mailer"/>
+            <argument type="service" id="templating"/>
+            <argument type="string">%recipient_contact%</argument>
+            <argument type="string">%sender_contact%</argument>
+        </service>
+
     </services>
 
 </container>

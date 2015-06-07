@@ -15,7 +15,7 @@ foreach ($files as $file) {
     }
 }
 
-$autoload->addPsr4('Lpi\\Kernel\\', __DIR__.'/../src/');
+$autoload->addPsr4('Lpi\\KernelBundle\\', __DIR__.'/../..');
 
 if (!$autoload) {
     die('Unable to find autoload.php file, please use composer to load dependencies:
