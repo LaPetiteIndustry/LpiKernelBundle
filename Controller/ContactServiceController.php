@@ -5,16 +5,11 @@ use Lpi\KernelBundle\Entity\Contact;
 use Lpi\KernelBundle\Exception\MailNotSendException;
 use Lpi\KernelBundle\Form\ContactType;
 use Lpi\KernelBundle\Service\ContactMailer;
-use Sonata\BlockBundle\Block\BaseBlockService;
-use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class ContactServiceController
 {

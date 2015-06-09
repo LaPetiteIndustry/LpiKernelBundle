@@ -4,8 +4,8 @@ namespace Lpi\KernelBundle\Entity\Behaviour;
 
 trait Timestampable
 {
-    private $createdAt;
-    private $updatedAt;
+    protected $createdAt;
+    protected $updatedAt;
 
     public function prePersist()
     {
