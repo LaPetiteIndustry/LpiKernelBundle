@@ -20,7 +20,7 @@ class ContentAdmin extends Admin
             ->add('content', 'sonata_formatter_type', array(
                 'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
                 'format_field' => 'contentFormatter',
-                'source_field' => 'rawContent',
+                'source_field' => 'content',
                 'source_field_options' => array(
                     'horizontal_input_wrapper_class' => $this->getConfigurationPool()->getOption('form_type') == 'horizontal' ? 'col-lg-12' : '',
                     'attr' => array('class' => $this->getConfigurationPool()->getOption('form_type') == 'horizontal' ? 'span10 col-sm-10 col-md-10' : '', 'rows' => 20)

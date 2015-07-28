@@ -86,5 +86,7 @@ abstract class BaseContent {
         return substr($this->getContent(),0, 50).'...';
     }
 
-
+    public function __toString(){
+        return $this->getExtrait();
+    }
 }
