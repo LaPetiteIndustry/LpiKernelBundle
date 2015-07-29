@@ -1,12 +1,4 @@
-{{ form_start(form, {'attr': {'id':'form_contact' }}) }}
-
-<div id="form_msg"></div>
-{{ form_widget(form.name, {'attr': {'placeholder': 'Name' }}) }}
-{{ form_widget(form.email, {'attr': {'placeholder': 'Email' }}) }}
-{{ form_widget(form.object, {'attr': {'placeholder': 'Object' }}) }}
-{{ form_widget(form.message, {'attr': {'placeholder': 'Message' }}) }}
-<input type="submit" value="Envoyer"/>
-{{ form_end(form) }}
+{{ include('@LpiKernel/Block/contact_form.html.twig') }}
 
 <script type="text/javascript">
 
