@@ -13,43 +13,6 @@ abstract class BaseContent {
 
     private $zone;
 
-
-    protected $rawContent;
-    protected $contentFormatter;
-
-    /**
-     * @return mixed
-     */
-    public function getRawContent()
-    {
-        return $this->rawContent;
-    }
-
-    /**
-     * @param mixed $rawContent
-     */
-    public function setRawContent($rawContent)
-    {
-        $this->rawContent = $rawContent;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getContentFormatter()
-    {
-        return $this->contentFormatter;
-    }
-
-    /**
-     * @param mixed $contentFormatter
-     */
-    public function setContentFormatter($contentFormatter)
-    {
-        $this->contentFormatter = $contentFormatter;
-    }
-
-
     /**
      * @return mixed
      */
@@ -86,7 +49,9 @@ abstract class BaseContent {
         return substr($this->getContent(),0, 50).'...';
     }
 
+
     public function __toString(){
         return $this->getExtrait();
     }
+
 }
