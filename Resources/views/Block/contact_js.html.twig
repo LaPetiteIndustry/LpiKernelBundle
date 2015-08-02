@@ -1,0 +1,30 @@
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+
+        jQuery('#form_contact').on("submit", function (event) {
+            event.preventDefault();
+            var form = jQuery(this);
+
+            var request = jQuery.ajax({
+                method: "POST",
+                url: form.attr("action"),
+                data: form.serialize()
+            });
+
+            request.done(function (msg) {
+                jQuery('#form_msg').html("Message envoyé");
+
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                var formMsg = jQuery('#form_msg');
+                formMsg.html("Erreur lors de votre envoi");
+                formMsg.addClass("error")
+            });
+
+        });
+
+
+    });
+</script>
