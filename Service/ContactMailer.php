@@ -3,6 +3,7 @@
 namespace Lpi\KernelBundle\Service;
 
 use Lpi\KernelBundle\Entity\Contact;
+use Lpi\KernelBundle\Entity\Sendable;
 use Lpi\KernelBundle\Exception\MailNotSendException;
 use Swift_Mailer;
 use Symfony\Component\Templating\EngineInterface;
@@ -31,12 +32,12 @@ class ContactMailer
     }
 
     /**
-     * @param Contact $contact
+     * @param Sendable $contact
      * @throws MailNotSendException
      */
-    public function send(Contact $contact)
+    public function send(Sendable $contact)
     {
-        $content = $this->templating->render('@LpiKernel/Contact/mail.txt.twig', ['contact' => $contact]);
+        $content = $this->templating->render('@LpiKernel/Contact/mail.txt.twig', ['contact' => $contact->prepareForSending()]);
         $message = \Swift_Message::newInstance('Formulaire de contact en provenance du site', $content, 'text/plain')
                                                 ->setTo($this->recipient)
                                                 ->setReplyTo($contact->getEmail())
