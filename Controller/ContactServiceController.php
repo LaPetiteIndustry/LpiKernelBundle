@@ -26,12 +26,12 @@ class ContactServiceController
      */
     private $mailer;
 
+    private $formBuilderInferfaceName;
+
     public function __construct(EngineInterface $templating, FormFactory $formFactory, Router $router, ContactMailer $mailer)
     {
         $this->formFactory = $formFactory;
         $this->action = $router->generate('contact_type');
-        $this->form = ContactType::createForm($formFactory, new Contact(), $this->action);
-
         $this->mailer = $mailer;
     }
 
@@ -42,26 +42,43 @@ class ContactServiceController
 
     public function submitFormAction(Request $request)
     {
-        $contact = new Contact();
-        $form = ContactType::createForm($this->formFactory, $contact, $this->action)->getForm();
+        $formBuilderInferfaceName = $request->get('formBuilderInferfaceName');
+
+        if ($formBuilderInferfaceName) {
+            $this->formBuilderInferfaceName = urldecode($formBuilderInferfaceName);
+        }
+        $form = $this->prepareForm($this->formBuilderInferfaceName)->getForm();
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             try {
                 $this->mailer->send($form->getData());
-            } catch(MailNotSendException $e) {
+            } catch (MailNotSendException $e) {
                 return new JsonResponse('Unable to send e-mail', 500);
             }
             return new JsonResponse('ok', 200);
         }
 
-        foreach ($form as $e)
-        {
-                foreach($e->getErrors(true) as $err) {
-                    $errors[$e->getName()] = $err->getMessage();
-                }
+        foreach ($form as $e) {
+            foreach ($e->getErrors(true) as $err) {
+                $errors[$e->getName()] = $err->getMessage();
+            }
         }
 
         return new JsonResponse($errors, 400);
+    }
+
+    /**
+     * @param $formBuilderInferfaceName
+     * @return FormBuilder
+     */
+    public function prepareForm($formBuilderInferfaceName)
+    {
+        $this->formBuilderInferfaceName = $formBuilderInferfaceName;
+
+        $FORM = $formBuilderInferfaceName::FORM;
+        $ENTITY = $formBuilderInferfaceName::ENTITY;
+        $this->form = $FORM::createForm($this->formFactory, new $ENTITY(), $this->action . '?formBuilderInferfaceName=' . urlencode($formBuilderInferfaceName));
+        return $this->form;
     }
 }

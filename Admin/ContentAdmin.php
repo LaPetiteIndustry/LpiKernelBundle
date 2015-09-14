@@ -18,6 +18,7 @@ class ContentAdmin extends Admin
     {
         $formMapper
             ->add('content', 'ckeditor', array(
+                'label' => 'Contenu',
                 'config' => ['allowedContent' => true]
             ))
             ->add('zone');

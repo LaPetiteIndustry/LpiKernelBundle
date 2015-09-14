@@ -10,6 +10,8 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ContactBlockService extends BaseBlockService
 {
@@ -24,8 +26,17 @@ class ContactBlockService extends BaseBlockService
         $this->service = $service;
     }
 
+    public function setDefaultSettings(OptionsResolverInterface $resolver)
+    {
+        $resolver->setOptional(['factory']);
+    }
+
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
+        $settings = $blockContext->getSettings();
+        $factory = ($settings['factory']);
+        $form = $this->service->prepareForm($factory);
+
         return $this->renderResponse('LpiKernelBundle:Block:contact.html.twig', array(
             'form' => $this->service->getFormView()
         ), $response);
