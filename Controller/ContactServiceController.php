@@ -50,7 +50,9 @@ class ContactServiceController
         $form = $this->prepareForm($this->formBuilderInferfaceName)->getForm();
         $form->handleRequest($request);
 
+
         if ($form->isValid()) {
+
             try {
                 $this->mailer->send($form->getData());
             } catch (MailNotSendException $e) {
@@ -59,8 +61,10 @@ class ContactServiceController
             return new JsonResponse('ok', 200);
         }
 
+
+        $errors = [];
         foreach ($form as $e) {
-            foreach ($e->getErrors(true) as $err) {
+            foreach ($form->getErrors(true) as $err) {
                 $errors[$e->getName()] = $err->getMessage();
             }
         }
