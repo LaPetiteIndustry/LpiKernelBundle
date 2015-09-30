@@ -2,8 +2,13 @@
 
 namespace Lpi\KernelBundle\Entity\Behaviour;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait Enablable
 {
+    /**
+     * @ORM\Column(type="boolean")
+     */
     protected $isEnabled = false;
 
     /**
